@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="span2">
+    <a class="btn btn-warning" href="{{ url_for('entry.manage') }}">
+      <i class="icon-arrow-left icon-white"></i>
+    Manage Entries</a>
+    <br /><br />
+    {% if entry %}
+      <script>
+        // #TODO move this into a lib file
+        function populatePreviewForm() {
+          $('#previewform input').each(function() {
+            var input = $(this);
+            $('#entryform input,#entryform select, #entryform textarea').each(function() {
+              if (input.attr('name') == $(this).attr('name')) {
+                input.attr('value', $(this).attr('value'));
+              }
+            });
+          });
+        }
+      </script>
+      <form method="POST" target="_blank" id="previewform" action="{{ url_for('entry.preview') }}">
+        <input type="hidden" name="title" value="undefined" />
+        <input type="hidden" name="user_id" value="0" />
+        <input type="hidden" name="category_id" value="0" />
+        <input type="hidden" name="text" value ="undefined" />
+        <a class="btn" href="#" onclick="populatePreviewForm(); $('#previewform').submit()">
+        <i class="icon-zoom-in"></i>
+      </form>
+    Preview</a>
+    {% endif %}
+  </div>
+  <div class="span9">
+    <form class="form-horizontal" id="entryform" action="{{ form_action }}" method="POST">
+      {% if entry %}
+        <input type="hidden" name="entry_id" value="{{ entry.id }}" />
+      {% endif %}
+      <fieldset>
+        <div class="control-group">
+          <label class="control-label" for="title">Title</label>
+          <div class="controls">
+            <input id="title" name="title" class="span7" value="{{ entry.title }}" />
+          </div>
+        </div>
+        {% if entry.slug %}
+        <div class="control-group">
+          <label class="control-label" for="slug">Slug</label>
+          <div class="controls">
+            <strong>{{ entry.slug }}</strong>
+          </div>
+        </div>
+        {% endif %}
+        <div class="control-group">
+          <label class="control-label" for="date_created">Date</label>
+          <div class="controls">
+            <input name="date_created" class="span3" value="{{ entry.date }}" disabled="disabled" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="user_id">Author</label>
+          <div class="controls">
+            <select name="user_id" class="span3">
+              {% if entry.user_id %}
+                {% for user in users %}
+                <option value="{{ user.id }}"{% if entry.user_id == user.id %} selected="selected"{% endif %}>
+                  {{ user.name }}
+                </option>
+                {% endfor %}
+              {% else %}
+                <option value="{{ g.user.id }}" selected="selected">{{ g.user.name }}</option>
+              {% endif %}
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="category_id">Category</label>
+          <div class="controls">
+            <select name="category_id" class="span3">
+              <option value="0">Uncategorized</option>
+              {% for category in categories %}
+              <option value="{{ category.id }}"{% if entry.category_id == category.id %} selected="selected"{% endif %}>
+                {{ category.name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="text">Content</label>
+          <div class="controls">
+            <textarea name="text" rows="20" class="span7">{{ entry.text }}</textarea>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="title"></label>
+          <div class="controls">
+            <label class="checkbox">
+              <input type="checkbox" name="published"value="1"{% if entry.published %} checked="checked"{% endif %} /> Publish Entry
+            </label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <input type="submit" class="btn btn-primary" value="{{ submit_value }}" />
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

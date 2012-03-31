@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <title>drewlustro.com</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prettify.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='prettify.js') }} "></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.1.js') }}"></script>
+  <script type="text/javascript" src="http://use.typekit.com/gzv0qnz.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body onload="prettyPrint()">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=179835715363182";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  
+  <div class="container" id="main-container">
+    <div id="ceiling-bar">
+      <div id="ceiling-bar-menu">
+        <i class="icon-home"></i>&nbsp;
+        <i class="icon-user"></i>&nbsp;
+        <i class="icon-pencil"></i>&nbsp;
+        <i class="icon-envelope"></i>
+      </div>
+      <div id="ceiling-bar-logo">
+
+      </div>
+      <div class="clear"></div>
+    </div>
+    <div id="header-gap" class="tk-ff-meta-serif-web-pro">
+      <img src="/img/stareye-85.png" />
+      <h1>Blog to End All Blogs</h1>
+      <div class="clear"></div>
+    </div>
+    <div id="content-border">
+      <div class="row">
+        <div class="span4" id="navigation">
+          {% if g.user %}
+          <div class="btn-group">
+            <a class="btn" href="{{ url_for('entry.show') }}">
+              <i class="icon white user"></i>
+              {{ g.user.username }}
+            </a>
+            <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" style="padding-bottom: 11px">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{{ url_for('entry.write') }}"><i class="icon-pencil"></i> Write</a></li>
+              <li><a href="{{ url_for('entry.manage') }}"><i class="icon-th-list"></i> Manage</a></li>
+              <li><a href="{{ url_for('category.manage') }}"><i class="icon-th-large"></i> Categories</a></li>
+              <li class="divider"></li>
+              <li><a href="{{ url_for('general.logout') }}"><i class="icon-off"></i> Logout</a></li>
+            </ul>
+          </div>
+          {% else %}
+          <a class="btn" href="{{ url_for('general.login') }}">Login</a>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div id="content-container">
+        {% for message in get_flashed_messages() %}
+          <div class="alert-message">{{ message }}</div>
+        {% endfor %}
+        {% block body %}{% endblock %}    
+      </div>
+      <!--
+      <div id="right-column">
+        <h1 class="tk-ff-meta-serif-web-pro">Categories</h1>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#">Python - 12</a> </li>
+          <li><a href="#">Design - 4</a></li>
+          <li><a href="#">Scaling - 2</a></li>
+          <li><a href="#">Echo Chamber - 10</a></li>
+        </ul>
+        
+        <h1 class="tk-ff-meta-serif-web-pro">Archives</h1>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#">March 2012 - 18</a></li>
+          <li><a href="#">April 2012 - 16</a></li>
+          <li><a href="#">May 2012 - 23</a></li>
+        </ul>
+      </div>
+      -->
+      <div class="clear"></div>
+      
+    </div>
+    
+  </div><!-- container -->
+  
+  
+  <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+</body>
+</html>

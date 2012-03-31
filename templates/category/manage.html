@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+{% set page_title = 'Manage Categories' %}
+{% include 'common/page_title_header.html' %}
+<table>
+  <thead>
+    <tr>
+      <th>
+        ORDER
+      </th>
+      <th>
+        NAME
+      </th>
+      <th>
+        ENTRY COUNT
+      </th>
+      <th>
+        <a class="btn btn-success" href="{{ url_for('.new') }}">
+          <i class="icon-pencil icon-white"></i>
+          Create New
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for category in categories %}
+    <tr>
+      <td width="50">
+        <div style="text-align: right">
+          {{ category.order }}
+        </div>
+      </td>
+      <td width="200">
+        {{ category.name }}
+      </td>
+      <td>
+        {{ category.entries|length }}
+      </td>
+      <td>
+        <a class="btn btn-warning" href="{{ url_for('.edit', category_id=category.id) }}">
+          <i class="icon-cog icon-white"></i>
+          Edit
+        </a>
+        <a class="btn btn-danger" href="{{ url_for('.delete', category_id=category.id) }}">
+          <i class="icon-trash icon-white"></i>
+          Delete
+        </a>
+      </td>
+    </tr>
+  {% else %}
+    <tr>
+      <td colspan="3">
+        No categories yet.
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

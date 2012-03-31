@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% set page_title = 'Write New Entry' %}
+{% include 'common/page_title_header.html' %}
+
+{% set form_action = url_for('.write') %}
+{% set submit_value = 'Post New Entry' %}
+{% include 'entry/_entry_form.html' %}
+
+{% endblock %}

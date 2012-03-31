@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="row title-header-container">
+    <div class="span3">
+      &nbsp;
+    </div>
+    <div class="span7 title-header">
+      <h1>{{ entry.title }}</h1>
+    </div>
+  </div>
+  <div class="row entry-container">
+    <div class="span3 entry-sidebar">
+      <div class="entry-metadata">
+        <span class="label">WRITTEN BY</span>
+        <br />
+        {{ entry.user.name }}
+        <br />
+        <br />
+        <span class="label">POSTED ON</span>
+        <br />
+        {{ entry.date_view }}
+        <br />
+        <br />
+        <span class="label">FILED UNDER</span>
+        <br />
+        {{ entry.category.name }}
+      </div>
+    </div>
+    <div class="span7 entry-content-container">
+      {{ entry.text|safe }}
+    </div>    
+  </div>    
+{% endblock %}
+

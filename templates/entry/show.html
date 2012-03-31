@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% for entry in entries %}
+    <div class="row title-header-container">
+      <div class="span2">
+        <div class="entry-calendar-stamp">
+          <strong class="tk-proxima-nova">MAR</strong>
+          <em>23</em>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="span10 title-header tk-proxima-nova">
+        <h1>{{ entry.title }}</h1>
+      </div>
+    </div>
+    <div class="row entry-container">
+      <div class="span2 entry-sidebar">
+        <div class="entry-metadata">          
+          by <a href="{{ url_for('entry.single', slug=entry.slug) }}">{{ entry.user.name }}</a>
+          <br />
+          in <a href="{{ url_for('entry.single', slug=entry.slug) }}">{{ entry.category.name }}</a>
+          <br />
+          <a href="{{ url_for('entry.single', slug=entry.slug) }}">permalink</a>
+          <br />
+        </div>
+      </div>
+      <div class="span10 entry-content-container">
+        {{ entry.text|safe }}
+        
+        <div class="entry-social-buttons">
+          <!-- Facebook Like Button -->
+          <div class="fb-like" data-href="http://tc.monospectra.com:5000{{ url_for('entry.single', slug=entry.slug) }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="lucida grande"></div>
+          
+          <!-- Tweet This Button -->
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://tc.monospectra.com:5000{{ url_for('entry.single', slug=entry.slug) }}" data-text="{{ entry.title }}" data-related="flatiron">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+          <div class="clear"></div>
+        </div>
+        
+          
+      </div>
+      
+    </div>
+    
+
+  {% else %}
+    <em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+{% endblock %}
+
+<div class="row" id="bottom-logo-container">
+  <div class="span12">
+    <div class="pagination pagination-centered">
+      <ul>
+        <li><a href="#">Prev</a></li>
+        <li class="active">
+          <a href="#">1</a>
+        </li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% block sidebar %}
+  <h4>Categories</h4>
+  <ul>
+    <li><a href="{{ url_for('.show') }}">All</li>
+    {% for category in categories %}
+      <li><a href="{{ url_for('entry.show_by_category', category_id=category.id) }}">{{ category.name }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

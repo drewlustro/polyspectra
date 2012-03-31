@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+{% set page_title = 'Edit Entry' %}
+{% include 'common/page_title_header.html' %}
+
+{% set form_action = url_for('.edit', entry_id=entry.id) %}
+{% set submit_value = 'Edit Entry' %}
+{% include 'entry/_entry_form.html' %}
+
+{% endblock %}
