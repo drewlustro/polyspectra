@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>Write New</h1>
-<form action="{{ url_for('.new') }}" method="POST">
-  {% set submit_value = 'Create New Category' %}
-  {% include 'category/_category_form.html' %}
-</form>
+{% set page_title = 'Create New Category' %}
+{% include 'common/page_title_header.html' %}
+<div class="row page-content-container">
+  
+  <form action="{{ url_for('.new') }}" method="POST">
+    {% set submit_value = 'Create New Category' %}
+    {% include 'category/_category_form.html' %}
+  </form>
+</div>
 {% endblock %}

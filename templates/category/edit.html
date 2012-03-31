@@ -1,9 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>Edit Category</h1>
-<form action="{{ url_for('category.edit') }}" method="POST">
+{% set page_title = 'Edit Category' %}
+{% include 'common/page_title_header.html' %}
+<div class="row page-content-container">
+  <form action="{{ url_for('category.edit') }}" method="POST">
   <input type="hidden" name="category_id" value="{{ category.id }}" />
   {% set submit_value = 'Edit Category' %}
   {% include 'category/_category_form.html' %}
-</form>
+  </form>
+</div>
 {% endblock %}
