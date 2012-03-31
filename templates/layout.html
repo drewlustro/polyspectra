@@ -6,8 +6,14 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='prettify.css') }}">
   <script type="text/javascript" src="{{ url_for('static', filename='prettify.js') }} "></script>
   <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.7.1.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='audio-player.js') }}"></script>
   <script type="text/javascript" src="http://use.typekit.com/gzv0qnz.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript">
+    AudioPlayer.setup("{{ url_for('static', filename='player.swf') }}", {  
+                   width: 290  
+    });
+  </script>
 </head>
 <body onload="prettyPrint()">
   <div id="fb-root"></div>

@@ -85,6 +85,22 @@
           </div>
         </div>
         <div class="control-group">
+          <label class="control-label" for="entry_type">Type</label>
+          <div class="controls">
+            <select name="entry_type" id="entry_type" class="span3">              
+              {% for et in entry_types %}
+              <option value="{{ et }}"{% if entry.entry_type == et %} selected="selected"{% endif %}>{{ et }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="type_meta">Type Meta</label>
+          <div class="controls">
+            <input id="type_meta" name="type_meta" class="span7" value="{{ entry.type_meta }}" />
+          </div>
+        </div>
+        <div class="control-group">
           <label class="control-label" for="text">Content</label>
           <div class="controls">
             <textarea name="text" rows="20" class="span7">{{ entry.text }}</textarea>

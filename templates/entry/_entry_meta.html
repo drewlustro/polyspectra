@@ -1,0 +1,5 @@
+<div class="entry-metadata">          
+  by <a href="{{ url_for('entry.single', slug=entry.slug) }}">{{ entry.user.name }}</a>
+  in <a href="{{ url_for('entry.single', slug=entry.slug) }}">{{ entry.category.name }}</a>
+  <a href="{{ url_for('entry.single', slug=entry.slug) }}">permalink</a>
+</div>

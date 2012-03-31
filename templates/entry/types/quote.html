@@ -1,0 +1,10 @@
+<div class="row entry-container">
+  {% include 'entry/_sidebar.html' %}
+  <div class="span10 entry-content-container">
+    <blockquote>
+      <p>{{ entry.text|safe }}</p>
+    <small>{{ entry.type_meta }}</small>
+    </blockquote>
+  </div>  
+</div>
+

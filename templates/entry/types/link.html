@@ -1,0 +1,10 @@
+<div class="row entry-container">
+  {% include 'entry/_sidebar.html' %}
+  <div class="span10 entry-content-container">
+    <div class="well">
+      <a href="{{ entry.type_meta }}" target="_blank">{{ entry.type_meta }}</a>
+    </div>
+    {{ entry.text|safe }}
+  </div>  
+</div>
+

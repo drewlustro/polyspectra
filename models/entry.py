@@ -14,7 +14,7 @@ class EntryType:
     LINK = 'link'
     
     @classmethod
-    def all_types(cls):
+    def all(cls):
         return [cls.BLOG, cls.IMAGE, cls.MUSIC, cls.QUOTE, cls.LINK]
     
     
@@ -22,7 +22,7 @@ class Entry(Base):
     __tablename__ = 'entries'
     id = Column(Integer, primary_key=True)
     date = Column(DateTime)
-    entry_type = Column(String(255))
+    entry_type = Column(String(255)) # used as Entry.entry_
     title = Column(String(255))
     slug = Column(String(60), unique=True)
     published = Column(Boolean)    
@@ -30,7 +30,7 @@ class Entry(Base):
     user = relationship('User', backref=backref('entries', lazy='dynamic'))
     category_id = Column(Integer, ForeignKey('categories.id'))
     # category = relationship('Category', backref=backref('entries', lazy='dynamic'))
-    meta_url = Column(Text)
+    type_meta = Column(Text)
     text = Column(Text)
     heart_count = Column(Integer)
     comment_count = Column(Integer)
@@ -41,10 +41,8 @@ class Entry(Base):
         self.text = kwargs.get('text', '')
         self.date = kwargs.get('date', datetime.utcnow())
         self.category_id = kwargs.get('category_id', 0)
-        self.entry_type = kwargs.get('entry_type', EntryType.BLOG)
-        if not self.entry_type in EntryType.all_types():
-            self.entry_type = EntryType.BLOG
-        self.meta_url = kwargs.get('meta_url','')
+        self.entry_type = kwargs.get('entry_type', EntryType.BLOG)    
+        self.type_meta = kwargs.get('type_meta','')
         self.heart_count = kwargs.get('heart_count', 0)
         self.comment_count = kwargs.get('comment_count', 0)
         
@@ -83,11 +81,13 @@ class Entry(Base):
         if not self.slug:
             self.slug = self.generate_slug()
         
-    @property
-    def date_view(self):
-        return self.date.strftime('%B %d')
-        
+
     def create(self):
+        # TODO: move this out of here and find out how to do custom
+        # getters and setters with SQLAlchemy
+        if not self.entry_type in EntryType.all():
+            raise Exception('Invalid EntryType')
+            return False
         db_session.add(self)
         db_session.commit()
         return True

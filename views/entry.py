@@ -1,5 +1,5 @@
 from datetime import datetime
-from polyspectra.models import User, Entry, Category
+from polyspectra.models import User, Entry, EntryType, Category
 from polyspectra.wrappers import auth_required
 
 from flask import Blueprint, render_template, flash, redirect, \
@@ -57,7 +57,8 @@ def write():
     if request.method == 'POST':
         user_id = g.user.id
         new_entry = Entry(user_id, title=request.form['title'], 
-                        text=request.form['text'], category_id=request.form['category_id'])
+                        text=request.form['text'], category_id=request.form['category_id'],
+                        entry_type=request.form['entry_type'], type_meta=request.form['type_meta'])
         try:
             if request.form['published']:
                 new_entry.publish()
@@ -73,8 +74,10 @@ def write():
     entry = {'date': entry_date}
     categories = Category.query.all()
     users = User.query.order_by(User.name.desc()).all()
+    entry_types = EntryType.all()
     return render_template('entry/write.html', entry=entry, 
-                            categories=categories, users=users)
+                            categories=categories, users=users,
+                            entry_types=entry_types)
 
 
 @mod.route('/edit/<int:entry_id>', methods=['GET', 'POST'])
@@ -90,6 +93,8 @@ def edit(entry_id):
         entry.text = request.form['text']
         entry.category_id = request.form['category_id']
         entry.user_id = request.form['user_id']
+        entry.entry_type = request.form['entry_type']
+        entry.type_meta = request.form['type_meta']
         
         try:
             if request.form['published']:
@@ -107,12 +112,14 @@ def edit(entry_id):
     categories = Category.query.all()
     entry = Entry.query.filter(Entry.id == entry_id).first()
     users = User.query.order_by(User.name.desc()).all()
+    entry_types = EntryType.all()
     if not Entry:
         flash('Entry not found, so cannot edit.')
         redirect(url_for('.manage'))
 
     return render_template('entry/edit.html', entry=entry,
-                            categories=categories, users=users)
+                            categories=categories, users=users,
+                            entry_types=entry_types)
 
 # Delete Entry
 @mod.route('/delete/<int:entry_id>', methods=['GET'])

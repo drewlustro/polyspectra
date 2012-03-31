@@ -33,3 +33,7 @@ def before_request():
 @app.teardown_request
 def shutdown_session(exception=None):
     db_session.remove()
+    
+@app.template_filter('datetimeformat')
+def datetimeformat(value, format='%H:%M / %d-%m-%Y'):
+    return value.strftime(format)
