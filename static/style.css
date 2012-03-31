@@ -7,13 +7,15 @@ body {
   background-color: #fcfcfc;
 }
 
-a:link, a:visited, a:active {
-  color: #1A48AB;
+.entry-content-container a:link, 
+.entry-content-containera a:visited, 
+.entry-content-container a:active {
+  color: #13AB71;
   text-decoration: none;
 }
 
-a:hover {
-  color: #597BC3;
+.entry-content-container a:hover {
+  color: #4DC396;
   text-decoration: none;
 }
 
@@ -34,9 +36,9 @@ a:hover {
 }
 
 #ceiling-bar {
-  height: 40px;
-  padding: 5px 0;
-  border-top: 3px solid #FF9E35;
+  height: 80px;
+  padding: 20px 0 0 0;
+  border-top: 3px solid #13AB71;
   margin-bottom: 20px;
 }
 
@@ -48,14 +50,18 @@ a:hover {
 }
 
 #ceiling-bar-logo {
-  float: right;
-  text-align: right;
+  float: left;
+  width: 400px;
+  padding-left: 55px;
+  font-size: 40px;
+  line-height: 30px;
+  color: #555;
+  font-weight: 600;
 }
 
 #header-gap {
   height: 95px;
   padding: 10px 20px;
-  border-bottom: 1px solid #ccc;
 }
 
 #header-gap img {
@@ -87,6 +93,11 @@ a:hover {
 }
 
 #navigation {
+  position: fixed;
+  bottom: 300px;
+  left: 0;
+  width: 200px;
+  height: 200px;
   padding: 25px 20px;
 }
 
@@ -103,7 +114,7 @@ a:hover {
 #page-title-header h1 {
   font-size: 3em;
   font-weight: 100;
-  color: #FF9E35;
+  color: #4DC396;
 }
 
 .title-header-container {  
@@ -161,6 +172,7 @@ a:hover {
   padding: 5px 5px 3px 5px;
   margin-bottom: 3px;
   border-bottom: 1px dotted #aaa;
+  color: #13AB71;
 }
 
 .entry-calendar-stamp em {

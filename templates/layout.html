@@ -24,18 +24,39 @@
     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=179835715363182";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="span4" id="navigation">
+      {% if g.user %}
+      <div class="btn-group">
+        <a class="btn" href="{{ url_for('entry.show') }}">
+          <i class="icon white user"></i>
+          {{ g.user.username }}
+        </a>
+        <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" style="padding-bottom: 11px">
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('entry.write') }}"><i class="icon-pencil"></i> Write</a></li>
+          <li><a href="{{ url_for('entry.manage') }}"><i class="icon-th-list"></i> Manage</a></li>
+          <li><a href="{{ url_for('category.manage') }}"><i class="icon-th-large"></i> Categories</a></li>
+          <li class="divider"></li>
+          <li><a href="{{ url_for('general.logout') }}"><i class="icon-off"></i> Logout</a></li>
+        </ul>
+      </div>
+      {% else %}
+      <a class="btn" href="{{ url_for('general.login') }}">Login</a>
+      {% endif %}
+    </div>
+
   
   <div class="container" id="main-container">
     <div id="ceiling-bar">
+      <div id="ceiling-bar-logo" class="tk-proxima-nova-extra-condensed">
+        DREW LUSTRO
+      </div>
       <div id="ceiling-bar-menu">
-        <i class="icon-home"></i>&nbsp;
-        <i class="icon-user"></i>&nbsp;
-        <i class="icon-pencil"></i>&nbsp;
-        <i class="icon-envelope"></i>
+        
       </div>
-      <div id="ceiling-bar-logo">
-
-      </div>
+      
       <div class="clear"></div>
     </div>
     <div id="header-gap" class="tk-ff-meta-serif-web-pro">
@@ -44,30 +65,7 @@
       <div class="clear"></div>
     </div>
     <div id="content-border">
-      <div class="row">
-        <div class="span4" id="navigation">
-          {% if g.user %}
-          <div class="btn-group">
-            <a class="btn" href="{{ url_for('entry.show') }}">
-              <i class="icon white user"></i>
-              {{ g.user.username }}
-            </a>
-            <a class="btn dropdown-toggle" href="#" data-toggle="dropdown" style="padding-bottom: 11px">
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ url_for('entry.write') }}"><i class="icon-pencil"></i> Write</a></li>
-              <li><a href="{{ url_for('entry.manage') }}"><i class="icon-th-list"></i> Manage</a></li>
-              <li><a href="{{ url_for('category.manage') }}"><i class="icon-th-large"></i> Categories</a></li>
-              <li class="divider"></li>
-              <li><a href="{{ url_for('general.logout') }}"><i class="icon-off"></i> Logout</a></li>
-            </ul>
-          </div>
-          {% else %}
-          <a class="btn" href="{{ url_for('general.login') }}">Login</a>
-          {% endif %}
-        </div>
-      </div>
+      
       
       <div id="content-container">
         {% for message in get_flashed_messages() %}
