@@ -4,7 +4,7 @@ html, body {
 
 body {
   /* padding-top: 40px; */
-  background: #fcfcfc url(/img/bg-graph.png) repeat top left; 
+  background: #fcfcfc url(/img/bg-graph-crumple.png) repeat top center; 
 }
 
 .entry-content-container a:link, 
@@ -36,9 +36,10 @@ body {
 }
 
 #ceiling-bar {
-  height: 80px;
+  height: 180px;
   padding: 20px 0 0 0;
   border-top: 3px solid #13AB71;
+  border-bottom: 1px solid #ddd;
   margin-bottom: 20px;
 }
 
@@ -51,9 +52,10 @@ body {
 }
 
 #ceiling-bar-logo {
-  float: left;
+  float: right;
+  text-align: right;
   width: 400px;
-  padding-left: 55px;
+  padding-right: 55px;
   font-size: 40px;
   line-height: 30px;
   color: #555;
@@ -61,6 +63,7 @@ body {
 }
 
 #header-gap {
+  display: none;
   height: 95px;
   padding: 10px 20px;
   border-bottom: 1px solid #4DC396;
@@ -168,6 +171,7 @@ body {
   background-color: #f6f6f6;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 10px #c0c0c0;
 }
 
 .entry-calendar-stamp strong {
@@ -218,6 +222,7 @@ body {
   padding: 10px;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ccc;
+  box-shadow: 0 0 10px #c0c0c0;
 }
 
 .page-content-container {
